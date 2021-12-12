@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace CabInvoiceGenerator
@@ -26,6 +27,15 @@ namespace CabInvoiceGenerator
                 totalFare += this.CalculateCabFare(data.distance, data.time);
             }
             return totalFare;
+        }
+        public InvoiceSummary CalculateInvoiceSummary(Ride[] ride)
+        {
+            double totalFare = this.CalculateCabFare(ride);
+            InvoiceSummary summary = new InvoiceSummary();
+            summary.totalFare = totalFare;
+            summary.totalNumberOfRides = ride.Count();
+            summary.CalulateAverageFare();
+            return summary;
         }
     }
 }
